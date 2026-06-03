@@ -1,0 +1,18 @@
+M = modified ( replace file in your project )
+A = added ( add file in your project )
+D = deleted ( delete file in your project )
+R = renamed ( rename file in your project )
+
+0 Added | 1 Deleted | 10 Modified | 0 Renamed
+---
+D	app/Repositories/Backend/WalletBonusFilterExport.php
+M	resources/lang/frontend/en/static.php
+M	resources/views/backend/layouts/partials/sidebar.blade.php
+M	resources/views/backend/settings/index.blade.php
+M	resources/views/frontend/account/address.blade.php
+M	resources/views/frontend/account/notification.blade.php
+M	resources/views/frontend/account/review.blade.php
+M	resources/views/frontend/booking/index.blade.php
+M	resources/views/frontend/booking/service.blade.php
+M	resources/views/frontend/favourite/index.blade.php
+M	resources/views/frontend/service/index.blade.php

@@ -1,0 +1,95 @@
+Read the README.txt first to understand how to use changelog.txt and/or changed-files
+
+M = modified ( replace file in your project )
+A = added ( add file in your project )
+D = deleted ( delete file in your project )
+R = renamed ( rename file in your project )
+
+3 Added | 61 Deleted | 21 Modified | 1 Renamed
+---
+A	.DS_Store
+M	android/.DS_Store
+M	android/app/.DS_Store
+M	assets/.DS_Store
+M	ios/.DS_Store
+D	ios/Pods/Local Podspecs/Flutter.podspec.json
+D	ios/Pods/Local Podspecs/cloud_firestore.podspec.json
+D	ios/Pods/Local Podspecs/cloud_functions.podspec.json
+D	ios/Pods/Local Podspecs/connectivity_plus.podspec.json
+D	ios/Pods/Local Podspecs/device_info_plus.podspec.json
+D	ios/Pods/Local Podspecs/firebase_app_check.podspec.json
+D	ios/Pods/Local Podspecs/firebase_auth.podspec.json
+D	ios/Pods/Local Podspecs/firebase_core.podspec.json
+D	ios/Pods/Local Podspecs/firebase_messaging.podspec.json
+D	ios/Pods/Local Podspecs/firebase_storage.podspec.json
+D	ios/Pods/Local Podspecs/flutter_downloader.podspec.json
+D	ios/Pods/Local Podspecs/flutter_inappwebview_ios.podspec.json
+D	ios/Pods/Local Podspecs/flutter_local_notifications.podspec.json
+D	ios/Pods/Local Podspecs/flutter_localization.podspec.json
+D	ios/Pods/Local Podspecs/flutter_native_splash.podspec.json
+D	ios/Pods/Local Podspecs/flutter_pdfview.podspec.json
+D	ios/Pods/Local Podspecs/fluttertoast.podspec.json
+D	ios/Pods/Local Podspecs/geocoding_ios.podspec.json
+D	ios/Pods/Local Podspecs/geolocator_apple.podspec.json
+D	ios/Pods/Local Podspecs/google_maps_flutter_ios.podspec.json
+D	ios/Pods/Local Podspecs/google_sign_in_ios.podspec.json
+D	ios/Pods/Local Podspecs/image_picker_ios.podspec.json
+D	ios/Pods/Local Podspecs/in_app_review.podspec.json
+D	ios/Pods/Local Podspecs/map_launcher.podspec.json
+D	ios/Pods/Local Podspecs/open_file_ios.podspec.json
+D	ios/Pods/Local Podspecs/package_info_plus.podspec.json
+D	ios/Pods/Local Podspecs/path_provider_foundation.podspec.json
+D	ios/Pods/Local Podspecs/permission_handler_apple.podspec.json
+D	ios/Pods/Local Podspecs/rate_my_app.podspec.json
+D	ios/Pods/Local Podspecs/saver_gallery.podspec.json
+D	ios/Pods/Local Podspecs/share_plus.podspec.json
+D	ios/Pods/Local Podspecs/shared_preferences_foundation.podspec.json
+D	ios/Pods/Local Podspecs/sqflite_darwin.podspec.json
+D	ios/Pods/Local Podspecs/url_launcher_ios.podspec.json
+D	ios/Pods/Local Podspecs/wakelock_plus.podspec.json
+D	ios/Pods/Local Podspecs/webview_flutter_wkwebview.podspec.json
+A	ios/Runner/.DS_Store
+M	ios/Runner/AppDelegate.swift
+M	ios/Runner/Info.plist
+M	lib/.DS_Store
+A	lib/common/.DS_Store
+R092	windows/.DS_Store	lib/common/languages/.DS_Store
+M	lib/common/languages/language_change.dart
+M	lib/main.dart
+M	lib/models/current_zone_model.dart
+M	lib/providers/.DS_Store
+M	lib/providers/app_pages_providers/location_provider.dart
+M	lib/providers/app_pages_providers/payment_provider.dart
+M	lib/providers/app_pages_providers/slot_booking_provider.dart
+M	lib/providers/auth_providers/login_provider.dart
+M	lib/providers/auth_providers/splash_provider.dart
+M	lib/providers/common_providers/common_api_provider.dart
+M	lib/screens/app_pages_screens/current_location_screen/layouts/google.dart
+M	lib/screens/bottom_screens/dashboard/dashboard.dart
+M	lib/screens/bottom_screens/home_screen/dubai_layout/dubai_body.dart
+M	lib/services/environment.dart
+D	web/favicon.png
+D	web/icons/Icon-192.png
+D	web/icons/Icon-512.png
+D	web/icons/Icon-maskable-192.png
+D	web/icons/Icon-maskable-512.png
+D	web/index.html
+D	web/manifest.json
+D	windows/.gitignore
+D	windows/CMakeLists.txt
+D	windows/flutter/CMakeLists.txt
+D	windows/flutter/generated_plugin_registrant.cc
+D	windows/flutter/generated_plugin_registrant.h
+D	windows/flutter/generated_plugins.cmake
+D	windows/runner/CMakeLists.txt
+D	windows/runner/Runner.rc
+D	windows/runner/flutter_window.cpp
+D	windows/runner/flutter_window.h
+D	windows/runner/main.cpp
+D	windows/runner/resource.h
+D	windows/runner/resources/app_icon.ico
+D	windows/runner/runner.exe.manifest
+D	windows/runner/utils.cpp
+D	windows/runner/utils.h
+D	windows/runner/win32_window.cpp
+D	windows/runner/win32_window.h

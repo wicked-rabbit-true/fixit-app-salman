@@ -1,0 +1,27 @@
+Read the README.txt first to understand how to use changelog.txt and/or changed-files
+
+M = modified ( replace file in your project )
+A = added    ( add     file in your project )
+D = deleted  ( delete  file in your project )
+R = renamed  ( rename  file in your project )
+
+0 Added | 2 Deleted | 15 Modified | 1 Renamed
+---
+M	.DS_Store
+M	android/.DS_Store
+M	android/app/.DS_Store
+M	android/app/src/main/AndroidManifest.xml
+M	assets/.DS_Store
+M	ios/.DS_Store
+R080	lib/screens/bottom_screens/.DS_Store	ios/Flutter/.DS_Store
+M	ios/Runner/.DS_Store
+M	ios/Runner/AppDelegate.swift
+M	ios/Runner/Info.plist
+M	lib/.DS_Store
+M	lib/common/languages/language_change.dart
+M	lib/main.dart
+D	lib/providers/.DS_Store
+M	lib/screens/.DS_Store
+M	lib/screens/auth_screens/current_location_screen/layouts/google.dart
+D	lib/screens/bottom_screens/wallet_screen/.DS_Store
+M	lib/services/environment.dart

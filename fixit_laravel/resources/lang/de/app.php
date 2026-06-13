@@ -1,9 +1,9 @@
 <?php
 
 return [
-     "fixit"=> "Fixit",
+     "fixit"=> "The Perhour",
   "skip"=> "ÜBERSPRINGEN",
-  "welcomeToJust"=> "Willkommen bei Just Fixit",
+  "welcomeToJust"=> "Willkommen bei The Perhour",
   "findYour"=> "Entdecken Sie Ihre Dienste",
   "bookYourDate"=> "Planen Sie Ihren Service",
   "goOnPayment"=> "Gehen Sie mit der Zahlung ein",
@@ -650,7 +650,7 @@ return [
   "enterReferralCode"=> "Empfehlungscode eingeben",
   "refDec1"=> "Hey! Verwenden Sie meinen Empfehlungscode",
   "share"=> "Teilen",
-  "refDec2"=> "um bei Fixit mitzumachen und Belohnungen zu verdienen!",
+  "refDec2"=> "um bei The Perhour mitzumachen und Belohnungen zu verdienen!",
   "earnCoin"=> "Verdienen Sie 50 Münzen nach Abschluss Ihrer ersten Buchungen.",
   "noCoins"=> "50 Münzen",
   "copiedToClipboard"=> "In die Zwischenablage kopiert",

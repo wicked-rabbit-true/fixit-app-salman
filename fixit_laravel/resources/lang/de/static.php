@@ -2265,7 +2265,7 @@ return [
         'categories_per_page_help' => '*Wählen Sie, wie viele Kategorien auf jeder Seite angezeigt werden sollen.',
         'provider_list_per_page_help' => '*Legen Sie die Anzahl der Anbieter fest, die pro Seite aufgelistet werden sollen.',
         'upload_auth_image_size' => '*Empfohlene Größe: 600x400px. Unterstützte Formate: JPG, PNG.',
-        'auth_title_help' => '*Geben Sie eine Überschrift für den Authentifizierungsbereich ein, z.B. "Willkommen bei Fixit".',
+        'auth_title_help' => '*Geben Sie eine Überschrift für den Authentifizierungsbereich ein, z.B. "Willkommen bei The Perhour".',
         'auth_description_help' => '*Geben Sie eine kurze Beschreibung über den Authentifizierungsprozess oder die App-Funktion an.',
         'og_title_help' => '*Dieser Titel erscheint, wenn Ihre Website in sozialen Medien geteilt wird. Halten Sie ihn ansprechend und relevant.',
         'meta_tags_help' => '*Fügen Sie relevante Keywords, durch Kommas getrennt, hinzu, um die SEO-Sichtbarkeit zu verbessern.',

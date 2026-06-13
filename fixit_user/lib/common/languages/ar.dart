@@ -1,5 +1,5 @@
 dynamic ar = {
-  "fixit": "اصلحه",
+  "fixit": "The Perhour",
   "skip": "يتخطى",
   "welcomeToJust": "مرحبًا بك في الإصلاح فقط",
   "findYour": "ابحث عن خدماتك",

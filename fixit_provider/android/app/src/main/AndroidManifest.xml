@@ -38,7 +38,7 @@
         </intent>
     </queries>
     <application
-        android:label="Fixit Provider"
+        android:label="The Perhour"
         android:name="${applicationName}"
         android:enableOnBackInvokedCallback="true"
         android:requestLegacyExternalStorage="true"

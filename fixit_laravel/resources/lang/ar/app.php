@@ -1,9 +1,9 @@
 <?php
 
 return [
-    "fixit"=> "Fixit",
+    "fixit"=> "The Perhour",
     "skip"=> "يتخطى",
-    "welcomeToJust"=> "مرحبًا بك في فقط ثابت",
+    "welcomeToJust"=> "مرحبًا بك في The Perhour",
     "findYour"=> "اكتشف خدماتك",
     "bookYourDate"=> "جدولة خدمتك",
     "goOnPayment"=> "انتقل إلى الدفع",
@@ -601,7 +601,7 @@ return [
     "enterReferralCode" => "أدخل رمز الإحالة",
     "refDec1" => "مرحبًا! استخدم رمز الإحالة الخاص بي",
     "share" => "مشاركة",
-    "refDec2" => "للانضمام إلى Fixit وكسب المكافآت!",
+    "refDec2" => "للانضمام إلى The Perhour وكسب المكافآت!",
     "earnCoin" => "احصل على 50 عملة بعد إتمام أول حجز لك.",
     "noCoins" => "50 عملة",
     "copiedToClipboard" => "تم النسخ إلى الحافظة",

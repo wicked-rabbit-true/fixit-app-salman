@@ -1,7 +1,7 @@
 final dynamic de = {
-  "fixit": "Fixit",
+  "fixit": "The Perhour",
   "skip": "ÜBERSPRINGEN",
-  "welcomeToJust": "Willkommen bei Just Fixit",
+  "welcomeToJust": "Willkommen bei The Perhour",
   "findYour": "Entdecken Sie Ihre Dienste",
   "bookYourDate": "Planen Sie Ihren Service",
   "goOnPayment": "Gehen Sie mit der Zahlung ein",

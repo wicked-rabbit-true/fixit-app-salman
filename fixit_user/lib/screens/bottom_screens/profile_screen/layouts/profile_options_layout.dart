@@ -83,7 +83,7 @@ class ProfileOptionsLayout extends StatelessWidget {
                                             context, routeName.appDetails);
                                       } else if (s.key == 1) {
                                         Share.share(
-                                            'Download the fixit User App for get better services at home.\n\nhttps://play.google.com/store/apps/details?id=com.fixit');
+                                            'Download the The Perhour App for get better services at home.\n\nhttps://play.google.com/store/apps/details?id=com.fixit');
                                       }
                                     })
                                 : ProfileOptionLayout(

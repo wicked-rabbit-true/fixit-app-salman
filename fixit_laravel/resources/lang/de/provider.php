@@ -1,7 +1,7 @@
 <?php
 
 return [
-  "fixit"=> "Fixit",
+  "fixit"=> "The Perhour",
   "login"=> "ANMELDEN",
   "email"=> "E-Mail",
   "enterEmail"=> "E-Mail eingeben",
@@ -713,7 +713,7 @@ return [
   "enterReferralCode"=> "Empfehlungscode eingeben",
   "refDec1"=> "Hey! Verwenden Sie meinen Empfehlungscode",
   "share"=> "Teilen",
-  "refDec2"=> "um bei Fixit mitzumachen und Belohnungen zu verdienen!",
+  "refDec2"=> "um bei The Perhour mitzumachen und Belohnungen zu verdienen!",
   "earnCoin"=> "Verdienen Sie 50 Münzen nach Abschluss Ihrer ersten Buchungen.",
   "noCoins"=> "50 Münzen",
   "copiedToClipboard"=> "In die Zwischenablage kopiert",

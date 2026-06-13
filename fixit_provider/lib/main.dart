@@ -43,7 +43,7 @@ void main() async {
   try {
     if (Platform.isAndroid) {
       await Firebase.initializeApp(
-        name: 'Fixit',
+        name: 'The_Perhour',
         options: const FirebaseOptions(
           apiKey: "Enter your Android API key here",
           projectId: "Enter your Firebase project ID here",
@@ -55,7 +55,7 @@ void main() async {
       );
     } else {
       await Firebase.initializeApp(
-        name: 'Fixit',
+        name: 'The_Perhour',
         options: const FirebaseOptions(
           apiKey: "Enter your iOS API key here",
           projectId: "Enter your Firebase project ID here",
@@ -524,7 +524,7 @@ class _RouteToPageState extends State<RouteToPage> {
               );
 
               return MaterialApp(
-                title: 'Fixit Provider',
+                title: 'The Perhour',
                 debugShowCheckedModeBanner: false,
                 theme: AppTheme.fromType(ThemeType.light).themeData,
                 darkTheme: AppTheme.fromType(ThemeType.dark).themeData,

@@ -2883,7 +2883,7 @@ class Translation {
 
   static Translation defaultTranslations() {
     return Translation(
-      fixit: "Fixit",
+      fixit: "The Perhour",
       login: "LOGIN",
       bookingsToday: "Today's Service",
       email: "Email",

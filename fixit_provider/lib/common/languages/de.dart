@@ -1,5 +1,5 @@
 final dynamic de = {
-  "fixit": "Fixit",
+  "fixit": "The Perhour",
   "login": "ANMELDEN",
   "email": "E-Mail",
   "enterEmail": "E-Mail eingeben",

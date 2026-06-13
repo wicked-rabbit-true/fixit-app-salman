@@ -2679,10 +2679,10 @@ class Translation {
   // Provide default translations if API fetch fails
   static Translation defaultTranslations() {
     return Translation(
-        fixit: 'fixit',
+        fixit: 'The Perhour',
         skip: 'Skip',
         providerReviews: 'Provider Reviews',
-        welcomeToJust: 'Welcome to Fixit',
+        welcomeToJust: 'Welcome to The Perhour',
         findYour: "DISCOVER YOUE SERVICES" 'Find your service',
         bookYourDate: "SCHEDULE YOUE SERVICES" "BOOK YOUR DATE AND TIME",
         goOnPayment: "GO ON TO THE PAYMENT",

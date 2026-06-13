@@ -1,9 +1,9 @@
 <?php
 
 return [
-    "fixit"=> "fixit",
+    "fixit"=> "The Perhour",
     "skip"=> "SKIP",
-    "welcomeToJust"=> "WELCOME TO JUST FIXIT",
+    "welcomeToJust"=> "WELCOME TO THE PERHOUR",
     "findYour"=> "FIND YOUR SERVICES",
     "bookYourDate"=> "BOOK YOUR DATE AND TIME",
     "goOnPayment"=> "GO ON TO THE PAYMENT",
@@ -596,7 +596,7 @@ return [
     "enterReferralCode" => "Enter Referral Code",
     "refDec1" => "Hey! Use my referral code",
     "share" => "Share",
-    "refDec2" => "to join Fixit and earn rewards!",
+    "refDec2" => "to join The Perhour and earn rewards!",
     "earnCoin" => "Earn 50 coins after completing your first bookings.",
     "noCoins" => "50 coins",
     "copiedToClipboard" => "Copied to clipboard",

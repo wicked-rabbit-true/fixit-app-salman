@@ -561,7 +561,7 @@ class AppFonts {
   final areYouSureYouWantToCancelBooking = "areYouSureYouWantToCancelBooking";
   final optionForOrder = "optionForOrder";
   final useCurrentLocation = "useCurrentLocation";
-  final fixitUser = "Fixit User";
+  final fixitUser = "The Perhour";
   final readMore = "readMore";
   final readLess = "readLess";
   final copyCode = "copyCode";

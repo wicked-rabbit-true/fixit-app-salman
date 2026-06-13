@@ -40,7 +40,7 @@ void main() async {
   } else {
     log("app IOS");
     await Firebase.initializeApp(
-      name: "Fixit",
+      name: "The_Perhour",
       options: const FirebaseOptions(
         apiKey: "YOUR_API_KEY",
         appId: "YOUR_APP_ID",
@@ -252,7 +252,7 @@ class _RouteToPageState extends State<RouteToPage> {
                 );
 
                 return MaterialApp(
-                  title: 'Fixit User',
+                  title: 'The Perhour',
                   navigatorKey: navigatorKey,
                   debugShowCheckedModeBanner: false,
                   theme: AppTheme.fromType(ThemeType.light).themeData,

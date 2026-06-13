@@ -1,5 +1,5 @@
 dynamic en = {
-  "fixit": "Fixit",
+  "fixit": "The Perhour",
   "login": "LOGIN",
   "email": "Email",
   "enterEmail": "Enter Email",

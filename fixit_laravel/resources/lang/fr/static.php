@@ -2266,7 +2266,7 @@ return [
         'categories_per_page_help' => '*Choisissez combien de catégories afficher sur chaque page.',
         'provider_list_per_page_help' => '*Définissez le nombre de prestataires à lister par page.',
         'upload_auth_image_size' => '*Taille recommandée : 600x400px. Formats supportés : JPG, PNG.',
-        'auth_title_help' => '*Saisissez un titre pour la section d\'authentification, par ex. "Bienvenue sur Fixit".',
+        'auth_title_help' => '*Saisissez un titre pour la section d\'authentification, par ex. "Bienvenue sur The Perhour".',
         'auth_description_help' => '*Fournissez une brève description sur le processus d\'authentification ou les fonctionnalités de l\'application.',
         'og_title_help' => '*Ce titre apparaît lorsque votre site web est partagé sur les réseaux sociaux. Gardez-le engageant et pertinent.',
         'meta_tags_help' => '*Ajoutez des mots-clés pertinents séparés par des virgules pour améliorer la visibilité SEO.',

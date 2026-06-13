@@ -1,5 +1,5 @@
 final dynamic ar = {
-  "fixit": "اصلحه",
+  "fixit": "The Perhour",
   "login": "تسجيل الدخول",
   "email": "البريد الإلكتروني",
   "enterEmail": "أدخل البريد الإلكتروني",

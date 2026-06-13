@@ -225,7 +225,7 @@ return [
     'bookings' => [
         'service_price' => 'Service Price',
         'service_discount' => 'Service Discount',
-        'service_rate' => 'Service Rate',
+        'service_rate' => 'Hourly Rate',
         'coupon_discount' => 'Coupon Discount',
         'service_type' => 'Service Type',
         'add_ons' => 'Add-ons',
@@ -572,6 +572,9 @@ return [
     'services' => [
         'services'=> 'Services',
         'amount' => 'Amount',
+        'hourly_rate' => 'Hourly Rate',
+        'per_hour' => '/hr',
+        'minimum_hours' => 'Minimum hours',
         'home' => 'Home',
         'close' => 'Close',
         'filter_by' => 'Filter By',

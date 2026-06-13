@@ -28,14 +28,14 @@ class HomePageSeeder extends Seeder
                 'en' => [
                     'home_banner' => [
                         'status' => true,
-                        'title' => 'One-Stop Solution For Your ',
-                        'animate_text' => 'home services',
-                        'description' => "We connect you with trusted servicemen for all your home and business needs! 🏠💼 From repairs to installations, we’ve got you covered. 🔧✅ Easy booking, clear pricing, and stress-free service! 😊.",
+                        'title' => 'Book Home Services by the Hour with ',
+                        'animate_text' => 'The Perhour',
+                        'description' => 'From handymen to cleaners — hire trusted professionals at transparent hourly rates. Easy booking, clear pricing, stress-free service.',
                         'search_enable' => true,
                         'service_ids' => [],
                     ],
                     'categories_icon_list' => [
-                        'title' => 'Top Categories',
+                        'title' => 'Browse Categories',
                         'status' => true,
                         'category_ids' => []
                     ],

@@ -1,0 +1,39 @@
+/vendor/
+/node_modules/
+/.env
+/.env.*
+!/.env.example
+/storage/
+/public/storage
+/public/build/
+/public/hot
+/bootstrap/cache/*.php
+/.phpunit.result.cache
+/phpunit.xml
+/phpunit.xml.dist
+# IDE
+/.vscode/
+/.idea/
+/*.iml
+/*.sublime-project
+/*.sublime-workspace
+/.phpstorm.meta.php
+# Laravel IDE helper
+/_ide_helper.php
+/_ide_helper_models.php
+# Laravel Swoole / Horizon
+/horizon.sqlite
+/horizon.log
+# OS
+/.DS_Store
+/Thumbs.db
+/ehthumbs.db
+/Desktop.ini
+# Logs
+*.log
+# NPM / Yarn
+/package-lock.json
+/yarn.lock
+/pnpm-lock.yaml
+# macOS
+.DS_Store

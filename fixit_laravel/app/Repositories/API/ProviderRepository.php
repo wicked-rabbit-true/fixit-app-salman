@@ -357,6 +357,47 @@ class ProviderRepository extends BaseRepository
         }
     }
 
+    public function update($request, $id)
+    {
+        DB::beginTransaction();
+        try {
+            $user = $this->model->findOrFail($id);
+            $user->update($request->only(['name', 'email', 'phone', 'code', 'status', 'description', 'experience_duration', 'experience_interval']));
+
+            if ($request->hasFile('image') && $request->file('image')->isValid()) {
+                $user->clearMediaCollection('image');
+                $user->addMediaFromRequest('image')->toMediaCollection('image');
+            }
+
+            DB::commit();
+            return response()->json([
+                'success' => true,
+                'message' => __('static.provider.updated_successfully'),
+                'data' => new ProviderResource($user),
+            ]);
+        } catch (Exception $e) {
+            DB::rollback();
+            throw new ExceptionHandler($e->getMessage(), $e->getCode());
+        }
+    }
+
+    public function destroy($id)
+    {
+        DB::beginTransaction();
+        try {
+            $user = $this->model->findOrFail($id);
+            $user->delete();
+            DB::commit();
+            return response()->json([
+                'success' => true,
+                'message' => __('static.provider.deleted_successfully'),
+            ]);
+        } catch (Exception $e) {
+            DB::rollback();
+            throw new ExceptionHandler($e->getMessage(), $e->getCode());
+        }
+    }
+
     public function updateProviderZones($request)
     {
         $user_id = Helpers::getCurrentUserId();
@@ -370,7 +411,7 @@ class ProviderRepository extends BaseRepository
 
                     return response()->json([
                         'message' => __('static.provider.zone_id_updated'),
-                        'success' => false,
+                        'success' => true,
                     ]);
                 }
 

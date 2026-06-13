@@ -305,11 +305,11 @@ class LocationProvider with ChangeNotifier {
           locationSettings:
               const LocationSettings(accuracy: LocationAccuracy.high));
       log("position getZoneId:$position");
-      log("zone by point =====> ${isLocation == true ? "${api.zoneByPoint}?lat=${lat ?? position.latitude}&lng=${lan ?? position.longitude}" : "${api.zoneByPoint}?lat=${position.latitude}&lng=${position.longitude}"}");
+      log("zone by point =====> ${isLocation == true ? "${api.zoneByPoint}?lat=${lat ?? position.latitude}&lng=${lan ?? position.longitude}&allow_all_regions=1" : "${api.zoneByPoint}?lat=${position.latitude}&lng=${position.longitude}&allow_all_regions=1"}");
       await apiServices.getApi(
           isLocation == true
-              ? "${api.zoneByPoint}?lat=${lat ?? position.latitude}&lng=${lan ?? position.longitude}"
-              : "${api.zoneByPoint}?lat=${position.latitude}&lng=${position.longitude}",
+              ? "${api.zoneByPoint}?lat=${lat ?? position.latitude}&lng=${lan ?? position.longitude}&allow_all_regions=1"
+              : "${api.zoneByPoint}?lat=${position.latitude}&lng=${position.longitude}&allow_all_regions=1",
           []).then((value) async {
         log("CALUE zone api response:${value.data}");
         if (value.isSuccess!) {

@@ -1,7 +1,7 @@
 import 'dart:developer';
 import '../config.dart';
 
-String apiUrl = "Enter your api url here";
+String apiUrl = "http://162.35.160.177/api";
 String paymentUrl = "Enter your payment url here";
 String playstoreUrl = "Enter your playstore url here";
 String userAppPlayStoreUrl = "Enter your user app playstore url here";

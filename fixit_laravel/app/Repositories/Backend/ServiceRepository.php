@@ -124,7 +124,7 @@ class ServiceRepository extends BaseRepository
                     'discount' => $request->discount,
                     'per_serviceman_commission' => $request->per_serviceman_commission,
                     'duration' => $request->duration,
-                    'duration_unit' => $request->duration_unit,
+                    'duration_unit' => 'hours',
                     'user_id' => $request->user_id,
                     'description' => $request->description,
                     'content' => $request->content,

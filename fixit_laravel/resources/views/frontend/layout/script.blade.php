@@ -77,22 +77,20 @@
      });
      observer.observe();
 
-     // Location checking
-     $.ajax({
-         url: "{{ url('check-zone') }}",
-         method: 'GET',
-         success: function(data) {
-             if (!data.zoneSet) {
-                toastr.error("{{ __('frontend::static.location_error_message') }}");
-             } else {
-                 $('#overlay').hide();
-                 $('#locationBox').removeClass('show');
-                 if (data.location.length > 1) {
-                     $('#location').html(`<i class="iconsax" icon-name="location"></i><span>${data.location}</span>`);
-                 }
-             }
-         }
-     });
+      // Location checking
+      $.ajax({
+          url: "{{ url('check-zone') }}",
+          method: 'GET',
+          success: function(data) {
+              if (data.locationSet || data.zoneSet) {
+                  $('#overlay').hide();
+                  $('#locationBox').removeClass('show');
+                  if (data.location?.length > 1) {
+                      $('#location').html(`<i class="iconsax" icon-name="location"></i><span>${data.location}</span>`);
+                  }
+              }
+          }
+      });
 
      // Use current location button click
      $('#useCurrentLocationBtn').on('click', function() {

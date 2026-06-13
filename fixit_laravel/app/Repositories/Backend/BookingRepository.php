@@ -594,6 +594,113 @@ class BookingRepository extends BaseRepository
         }
     }
 
+    public function calendar()
+    {
+        return view('backend.booking.calendar');
+    }
+
+    public function calendarEvents($request)
+    {
+        $role = auth()->user()->getRoleNames()->first();
+        $query = Booking::whereNull('parent_id')
+            ->with(['service', 'consumer', 'provider', 'booking_status', 'sub_bookings.booking_status', 'sub_bookings.service', 'sub_bookings.consumer', 'sub_bookings.provider'])
+            ->whereNull('deleted_at');
+
+        if ($role == RoleEnum::PROVIDER) {
+            $query->whereHas('sub_bookings', function ($q) {
+                $q->where('provider_id', auth()->id());
+            });
+        } elseif ($role == RoleEnum::SERVICEMAN) {
+            $bookingIds = DB::table('booking_servicemen')
+                ->where('serviceman_id', auth()->id())
+                ->pluck('booking_id');
+            $parentIds = Booking::whereIn('id', $bookingIds)
+                ->whereNotNull('parent_id')
+                ->pluck('parent_id');
+            $query->whereIn('id', $parentIds);
+        }
+
+        $bookings = $query->get();
+        $events = [];
+
+        foreach ($bookings as $booking) {
+            if (!$booking->date_time) continue;
+
+            $service = $booking->service;
+            $duration = max((int) ($service?->duration ?? 1), 1);
+            $start = Carbon::parse($booking->date_time);
+
+            $end = $start->copy();
+            if (($service?->duration_unit ?? 'hours') === 'minutes') {
+                $end->addMinutes($duration);
+            } else {
+                $end->addHours($duration);
+            }
+
+            $color = $booking->booking_status?->color_code ?? 'FDB448';
+
+            $events[] = [
+                'id' => $booking->id,
+                'title' => '#' . $booking->booking_number . ' - ' . ($service?->title ?? 'N/A'),
+                'start' => $start->toIso8601String(),
+                'end' => $end->toIso8601String(),
+                'backgroundColor' => '#' . $color,
+                'borderColor' => '#' . $color,
+                'textColor' => '#ffffff',
+                'extendedProps' => [
+                    'booking_number' => $booking->booking_number,
+                    'customer' => $booking->consumer?->name ?? 'N/A',
+                    'provider' => $booking->provider?->name ?? 'N/A',
+                    'service' => $service?->title ?? 'N/A',
+                    'status' => $booking->booking_status?->name ?? 'N/A',
+                    'status_slug' => $booking->booking_status?->slug ?? 'pending',
+                    'amount' => $booking->total,
+                    'payment_status' => $booking->payment_status,
+                ],
+                'url' => route('backend.booking.show', $booking->id),
+            ];
+
+            if ($booking->is_scheduled_booking && $booking->sub_bookings->count()) {
+                foreach ($booking->sub_bookings as $child) {
+                    if (!$child->date_time) continue;
+
+                    $childStart = Carbon::parse($child->date_time);
+                    $childEnd = $childStart->copy();
+                    if (($service?->duration_unit ?? 'hours') === 'minutes') {
+                        $childEnd->addMinutes($duration);
+                    } else {
+                        $childEnd->addHours($duration);
+                    }
+
+                    $childColor = $child->booking_status?->color_code ?? 'FDB448';
+
+                    $events[] = [
+                        'id' => 'child-' . $child->id,
+                        'title' => '#' . $child->booking_number . ' - ' . ($service?->title ?? 'N/A'),
+                        'start' => $childStart->toIso8601String(),
+                        'end' => $childEnd->toIso8601String(),
+                        'backgroundColor' => '#' . $childColor,
+                        'borderColor' => '#' . $childColor,
+                        'textColor' => '#ffffff',
+                        'extendedProps' => [
+                            'booking_number' => $child->booking_number,
+                            'customer' => $child->consumer?->name ?? 'N/A',
+                            'provider' => $child->provider?->name ?? 'N/A',
+                            'service' => $service?->title ?? 'N/A',
+                            'status' => $child->booking_status?->name ?? 'N/A',
+                            'status_slug' => $child->booking_status?->slug ?? 'pending',
+                            'amount' => $child->total,
+                            'payment_status' => $child->payment_status,
+                        ],
+                        'url' => route('backend.booking.showChild', $child->id),
+                    ];
+                }
+            }
+        }
+
+        return response()->json($events);
+    }
+
     public  function bookingExportExcel()
     {
         return Excel::download(new BookingFilterExport, 'bookings.xlsx');

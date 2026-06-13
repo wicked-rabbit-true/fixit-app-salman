@@ -12,72 +12,64 @@ class TorontoTopCategories extends StatelessWidget {
 
       return Column(
         children: [
-          if (commonApi.dashboardModel?.categories?.isNotEmpty ?? false)
+          if (homeCategoryList.isNotEmpty)
             HeadingRowCommon(
                     title: translations!.topCategories,
                     isTextSize: true,
                     onTap: () => route.pushNamed(
                         context, routeName.categoriesListScreen))
                 .paddingSymmetric(horizontal: Insets.i20),
-          if (commonApi.dashboardModel?.categories?.isNotEmpty ?? false)
-            const VSpace(Sizes.s15),
-          GridView.builder(
-            physics: const NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
-            padding: const EdgeInsets.symmetric(horizontal: Sizes.s20),
-            itemCount: categories.isEmpty
-                ? 0
-                : (categories.length >= 8 ? 8 : categories.length),
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 4,
-              mainAxisExtent: Sizes.s110,
-              mainAxisSpacing: Sizes.s10,
-              crossAxisSpacing: Sizes.s10,
-            ),
-            itemBuilder: (context, index) {
-              final category = categories[index];
+          if (homeCategoryList.isNotEmpty) const VSpace(Sizes.s15),
+          if (homeCategoryList.isNotEmpty)
+            SizedBox(
+              height: Sizes.s130,
+              child: ListView.builder(
+                physics: const BouncingScrollPhysics(),
+                scrollDirection: Axis.horizontal,
+                padding: const EdgeInsets.symmetric(horizontal: Sizes.s20),
+                itemCount: homeCategoryList.length,
+                itemBuilder: (context, index) {
+                  final category = homeCategoryList[index];
 
-              return TopCategoriesLayout(
-                isCircle: true,
-                index: index,
-                selectedIndex: dash.topSelected,
-                data: homeCategoryList.isNotEmpty
-                    ? homeCategoryList[index]
-                    : null,
-                onTap: () {
-                  categoryDetails.hasCategoryList.clear();
+                  return TopCategoriesLayout(
+                    isCircle: true,
+                    index: index,
+                    selectedIndex: dash.topSelected,
+                    data: category,
+                    onTap: () {
+                      categoryDetails.hasCategoryList.clear();
 
-                  if (category.hasSubCategories != null &&
-                      category.hasSubCategories!.isNotEmpty) {
-                    categoryDetails.hasCategoryList.addAll(
-                      category.hasSubCategories!
-                          .map((subCategory) => CategoryModel(
-                                id: subCategory.id,
-                                title: subCategory.title,
-                                media: [
-                                  Media(
-                                    originalUrl: (subCategory.media != null &&
-                                            subCategory.media!.isNotEmpty)
-                                        ? subCategory.media![0].originalUrl
-                                        : '',
-                                  )
-                                ],
-                              ))
-                          .toList(),
-                    );
-                  }
+                      if (category.hasSubCategories != null &&
+                          category.hasSubCategories!.isNotEmpty) {
+                        categoryDetails.hasCategoryList.addAll(
+                          category.hasSubCategories!
+                              .map((subCategory) => CategoryModel(
+                                    id: subCategory.id,
+                                    title: subCategory.title,
+                                    media: [
+                                      Media(
+                                        originalUrl: (subCategory.media !=
+                                                    null &&
+                                                subCategory.media!.isNotEmpty)
+                                            ? subCategory.media![0].originalUrl
+                                            : '',
+                                      )
+                                    ],
+                                  ))
+                              .toList(),
+                        );
+                      }
 
-                  route.pushNamed(
-                    context,
-                    routeName.categoriesDetailsScreen,
-                    arg: homeCategoryList.isNotEmpty
-                        ? homeCategoryList[index]
-                        : null,
-                  );
+                      route.pushNamed(
+                        context,
+                        routeName.categoriesDetailsScreen,
+                        arg: category,
+                      );
+                    },
+                  ).padding(right: Sizes.s10);
                 },
-              );
-            },
-          )
+              ),
+            )
         ],
       );
     });

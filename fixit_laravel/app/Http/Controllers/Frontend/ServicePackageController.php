@@ -40,13 +40,15 @@ class ServicePackageController extends Controller
     public function filter($servicePackages)
     {
         $zoneIds = session('zoneIds', []);
-        $servicePackages = $servicePackages->whereHas('services', function (Builder $services) use ($zoneIds) {
-            $services->whereHas('categories', function (Builder $categories) use ($zoneIds) {
-                $categories->whereHas('zones', function (Builder $zones) use ($zoneIds) {
-                    $zones->WhereIn('zones.id', $zoneIds);
+        if (!empty($zoneIds)) {
+            $servicePackages = $servicePackages->whereHas('services', function (Builder $services) use ($zoneIds) {
+                $services->whereHas('categories', function (Builder $categories) use ($zoneIds) {
+                    $categories->whereHas('zones', function (Builder $zones) use ($zoneIds) {
+                        $zones->WhereIn('zones.id', $zoneIds);
+                    });
                 });
             });
-        });
+        }
 
         return  $servicePackages;
     }

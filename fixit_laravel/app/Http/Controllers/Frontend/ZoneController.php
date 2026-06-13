@@ -58,7 +58,14 @@ class ZoneController extends Controller
     public function checkZone(Request $request)
     {
         $zoneIds = session('zoneIds', []);
-        return response()->json(['zoneSet' => !empty($zoneIds), 'location' => session('location', [])]);
+        $zonesExist = Zone::whereNull('deleted_at')->exists();
+        $locationSet = session('location_set', false);
+        return response()->json([
+            'zoneSet' => !empty($zoneIds) || ($zonesExist && $locationSet),
+            'zonesExist' => $zonesExist,
+            'locationSet' => $locationSet,
+            'location' => session('location', []),
+        ]);
     }
 
     public function autoComplete(Request $request)
@@ -91,6 +98,7 @@ class ZoneController extends Controller
     public function setZone($lat, $lng, $address = null)
     {
         session(['location' => $address]);
+        session(['location_set' => true]);
         $zoneIds = $this->getZoneIds($lat, $lng);
         session(['zoneIds' => $zoneIds]);
         return $zoneIds;

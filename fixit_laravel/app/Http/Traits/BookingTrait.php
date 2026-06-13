@@ -193,9 +193,7 @@ trait BookingTrait
             }
         }
 
-        if(isset($booking->parent_id)){
-            event(new CreateBookingEvent($booking));
-        }
+        event(new CreateBookingEvent($booking));
         return $booking;
     }
 

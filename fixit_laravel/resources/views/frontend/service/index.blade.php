@@ -327,16 +327,16 @@
                                         @if (!empty($service?->discount) && $service?->discount > 0)
                                             @if (Helpers::getDefaultCurrency()->symbol_position === SymbolPositionEnum::LEFT)
                                                 <del>{{ Helpers::getDefaultCurrencySymbol() }}{{ Helpers::covertDefaultExchangeRate($service->price) }}</del>
-                                                <small>{{ Helpers::getDefaultCurrencySymbol() }}{{ Helpers::covertDefaultExchangeRate($service->service_rate) }}</small>
+                                                <small>{{ Helpers::getDefaultCurrencySymbol() }}{{ Helpers::covertDefaultExchangeRate($service->service_rate) }}{{ __('frontend::static.services.per_hour') }}</small>
                                             @else
                                                 <del>{{ Helpers::covertDefaultExchangeRate($service->price) }} {{ Helpers::getDefaultCurrencySymbol() }}</del>
-                                                <small>{{ Helpers::covertDefaultExchangeRate($service->service_rate) }} {{ Helpers::getDefaultCurrencySymbol() }}</small>
+                                                <small>{{ Helpers::covertDefaultExchangeRate($service->service_rate) }} {{ Helpers::getDefaultCurrencySymbol() }}{{ __('frontend::static.services.per_hour') }}</small>
                                             @endif
                                         @else
                                             @if (Helpers::getDefaultCurrency()->symbol_position === SymbolPositionEnum::LEFT)
-                                                <small>{{ Helpers::getDefaultCurrencySymbol() }}{{ Helpers::covertDefaultExchangeRate($service->service_rate) }}</small>
+                                                <small>{{ Helpers::getDefaultCurrencySymbol() }}{{ Helpers::covertDefaultExchangeRate($service->service_rate) }}{{ __('frontend::static.services.per_hour') }}</small>
                                             @else
-                                                <small>{{ Helpers::covertDefaultExchangeRate($service->service_rate) }} {{ Helpers::getDefaultCurrencySymbol() }}</small>
+                                                <small>{{ Helpers::covertDefaultExchangeRate($service->service_rate) }} {{ Helpers::getDefaultCurrencySymbol() }}{{ __('frontend::static.services.per_hour') }}</small>
                                             @endif
                                         @endif
                                     </div>
@@ -346,7 +346,7 @@
                                         <ul>
                                             <li class="time">
                                                 <i class="iconsax" icon-name="clock"></i>
-                                                <span>{{ $service?->duration }}{{ $service?->duration_unit === 'hours' ? 'h' : 'm' }}</span>
+                                                <span>{{ $service?->duration }}h min</span>
                                             </li>
                                             <li class="w-auto service-person">
                                                 <img src="{{ asset('frontend/images/svg/services-person.svg') }}" alt="">

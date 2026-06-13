@@ -469,6 +469,12 @@
                                     <span class="badge">{{ $bookingCounts['scheduled'] }}</span>
                                 @endif
                             </li>
+                            <li>
+                                <a href="{{ route('backend.booking.calendar') }}"
+                                    class="{{ Request::is('backend/booking/calendar') ? 'active' : '' }}">
+                                    {{ __('static.booking.calendar') }}
+                                </a>
+                            </li>
                         @endcan
                     </ul>
                 </li>

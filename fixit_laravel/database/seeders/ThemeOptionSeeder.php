@@ -31,8 +31,8 @@ class ThemeOptionSeeder extends Seeder
                 'favicon_icon' => '/frontend/images/logo/favicon-icon.png',
                 'footer_logo' => '/frontend/images/logo/dark-logo.png',
                 'site_title' => $this->baseName,
-                'site_tagline' => "Your One-Stop Solution for for your home services",
-                'breadcrumb_description' => 'Select a service from the below category list that correlates with your needs. It includes 15+ categories with 560+ different services in various sector.',
+                'site_tagline' => 'Book trusted home services by the hour',
+                'breadcrumb_description' => 'Browse hourly home services across our categories and book professionals in minutes.',
                 'app_store_url' => 'https://www.apple.com/in/app-store/',
                 'google_play_store_url' => 'https://play.google.com/store/apps/'
             ],

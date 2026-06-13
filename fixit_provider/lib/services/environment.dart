@@ -4,11 +4,10 @@ import 'dart:io';
 import '../config.dart';
 
 // FOR USER
-String apiUrl = "Enter your api url";
-String paymentUrl = "Enter your payment url"; 
+String apiUrl = "http://162.35.160.177/api";
+String paymentUrl = "Enter your payment url";
 String googleMapKey = "Enter your Google map key";
-String providerAppUrl =
-    "Enter your provider app url";
+String providerAppUrl = "Enter your provider app url";
 // Global SharedPreferences and Locale
 late SharedPreferences sharedPreferences;
 String local = appSettingModel!.general!.defaultLanguage!.locale!;

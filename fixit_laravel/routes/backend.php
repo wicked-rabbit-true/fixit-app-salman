@@ -285,7 +285,8 @@ Route::group(['middleware' => ['auth', 'route.access'], 'namespace' => 'Backend'
     Route::post('booking/updateDateTime', 'BookingController@updateDateTime')->name('booking.updateDateTime')->middleware('can:backend.booking.edit');
     Route::post('/update-payment-status', 'BookingController@updatePaymentStatus')->name('booking.updatePaymentStatus')->middleware('can:backend.booking.edit');
     Route::delete('booking/{booking}/extra-charges/{charge}', 'BookingController@deleteExtraCharge')->name('booking.extra-charge.delete');
-
+    Route::get('booking/calendar', 'BookingController@calendar')->name('booking.calendar')->middleware('can:backend.booking.index');
+    Route::get('booking/calendar/events', 'BookingController@calendarEvents')->name('booking.calendar.events')->middleware('can:backend.booking.index');
 
     //Languages
     Route::resource('systemLang', 'LanguageController', ['except' => ['show']]);

@@ -7,7 +7,6 @@
 
 @php    
     $homePage = Helpers::getCurrentHomePage();
-    $categories = $categories->paginate($themeOptions['pagination']['categories_per_page'] ?? null);
     $categoryPageAdvertiseBanners = Helpers::getCategoryPageAdvertiseBanners();
     $advertiseServices = Helpers::getCategoryPageAdvertiseServices();
     $locale = app()->getLocale();
@@ -291,35 +290,33 @@
 
     <section class="category-section section-b-space">
         <div class="container-fluid-lg">
-            <div class="row g-lg-5 g-3 category-row">
-                <div class="col-xxl-3 col-lg-4">
-                    <ul class="nav nav-tabs custom-nav-tabs" id="myTab">
-                        @foreach ($categories as $key => $category)
-                            @php
-                                $locale = app()->getLocale();
-                                $mediaItems = $category->getMedia('image')->filter(function ($m) use ($locale) {
-                                    return $m->getCustomProperty('language') === $locale;
-                                });
-                                $imageUrl = $mediaItems->count() > 0 ? $mediaItems->first()->getUrl() : asset('frontend/images/placeholder.jpg');
-                            @endphp
-                            <li class="nav-item">
-                                <button class="nav-link categories {{ $loop->first ? 'active' : '' }}" id="{{ $category->slug }}-tab" data-bs-toggle="tab" data-bs-target="#{{ $category->slug }}">
-                                    <div class="img-box">
-                                        <img src="{{ Helpers::isFileExistsFromURL($imageUrl, true) }}" alt="{{ $category->title }}" class="img-fluid lozad">
-                                    </div>
-                                    <div class="text-box">
-                                        <span>{{ $category->title }}</span>
-                                        <small>{{ $category->allServices()->count() }} {{ __('frontend::static.home_page.services') }}</small>
-                                    </div>
-                                    <i class="iconsax" icon-name="arrow-right"></i>
-                                </button>
-                            </li>
-                        @endforeach
-                    </ul>
+            <div class="swiper category-slider category-scroll-tabs nav nav-tabs custom-nav-tabs mb-4" id="categoryTab">
+                <div class="swiper-wrapper">
+                    @foreach ($categories as $category)
+                        @php
+                            $mediaItems = $category->getMedia('image')->filter(function ($m) use ($locale) {
+                                return $m->getCustomProperty('language') === $locale;
+                            });
+                            $imageUrl = $mediaItems->count() > 0 ? $mediaItems->first()->getUrl() : asset('frontend/images/placeholder.jpg');
+                        @endphp
+                        <div class="swiper-slide nav-item">
+                            <button class="nav-link categories {{ $loop->first ? 'active' : '' }}" id="{{ $category->slug }}-tab" data-bs-toggle="tab" data-bs-target="#{{ $category->slug }}" type="button" role="tab">
+                                <div class="img-box">
+                                    <img src="{{ Helpers::isFileExistsFromURL($imageUrl, true) }}" alt="{{ $category->title }}" class="img-fluid lozad">
+                                </div>
+                                <div class="text-box">
+                                    <span>{{ $category->title }}</span>
+                                    <small>{{ $category->allServices()->count() }} {{ __('frontend::static.home_page.services') }}</small>
+                                </div>
+                                <i class="iconsax" icon-name="arrow-right"></i>
+                            </button>
+                        </div>
+                    @endforeach
                 </div>
+                <div class="swiper-pagination"></div>
+            </div>
 
-                <div class="col-xxl-9 col-lg-8">
-                    <div class="tab-content mt-0" id="myTabContent">
+            <div class="tab-content mt-0" id="myTabContent">
                         @foreach ($categories as $category)
                             <div class="tab-pane fade {{ $loop->first ? 'show active' : '' }}" id="{{ $category->slug }}">
 
@@ -396,8 +393,6 @@
                                 @endif
                             </div>
                         @endforeach
-                    </div>
-                </div>
             </div>
         </div>
     </section>
@@ -409,3 +404,28 @@
     @endforeach
 @endforeach
 @endsection
+
+@push('js')
+<script>
+    if (document.querySelector('.category-scroll-tabs')) {
+        new Swiper('.category-scroll-tabs', {
+            slidesPerView: 2.2,
+            spaceBetween: 12,
+            freeMode: true,
+            pagination: {
+                el: '.category-scroll-tabs .swiper-pagination',
+                clickable: true,
+            },
+            breakpoints: {
+                370: { slidesPerView: 3.2, spaceBetween: 12 },
+                590: { slidesPerView: 4.2, spaceBetween: 14 },
+                790: { slidesPerView: 5.5, spaceBetween: 16 },
+                950: { slidesPerView: 6.5, spaceBetween: 18 },
+                1160: { slidesPerView: 8, spaceBetween: 20 },
+                1380: { slidesPerView: 9, spaceBetween: 22 },
+                1600: { slidesPerView: 10, spaceBetween: 24 },
+            },
+        });
+    }
+</script>
+@endpush

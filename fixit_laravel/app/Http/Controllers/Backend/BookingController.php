@@ -153,4 +153,14 @@ class BookingController extends Controller
     {
         return $this->repository->bookingExport($request);
     }
+
+    public function calendar()
+    {
+        return $this->repository->calendar();
+    }
+
+    public function calendarEvents(Request $request)
+    {
+        return $this->repository->calendarEvents($request);
+    }
 }

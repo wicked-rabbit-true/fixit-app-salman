@@ -30,12 +30,19 @@ class UpdateServiceRequest extends FormRequest
             'type' => 'required|in:fixed,provider_site,remotely,scheduled',
             'service_rate' => 'required',
             'duration' => 'required',
-            'duration_unit' => 'required',
+            'duration_unit' => 'required|in:hours',
             'service_id' => 'array|required_if:is_random_related_services,0',
             'per_serviceman_commission' => 'required|numeric|between:0,100',
             'is_advance_payment_enabled' => 'boolean',
             'advance_payment_percentage' => 'required_if:is_advance_payment_enabled,1|exclude_if:type,scheduled|nullable|numeric|min:0|max:100',
         ];
+    }
+
+    public function prepareForValidation(): void
+    {
+        $this->merge([
+            'duration_unit' => 'hours',
+        ]);
     }
 
     public function messages(): array

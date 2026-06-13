@@ -69,11 +69,13 @@ class ServiceController extends Controller
     public function filter($services, $request)
     {
         $zoneIds = session('zoneIds', []);
-        $services = $services?->whereHas('categories', function (Builder $categories) use ($zoneIds) {
-            $categories->whereHas('zones', function (Builder $zones) use ($zoneIds) {
-                $zones->WhereIn('zones.id', $zoneIds);
+        if (!empty($zoneIds)) {
+            $services = $services?->whereHas('categories', function (Builder $categories) use ($zoneIds) {
+                $categories->whereHas('zones', function (Builder $zones) use ($zoneIds) {
+                    $zones->WhereIn('zones.id', $zoneIds);
+                });
             });
-        });
+        }
 
         if ($request->search) {
             $services = $services->where('title', 'like', '%'.$request->search.'%')

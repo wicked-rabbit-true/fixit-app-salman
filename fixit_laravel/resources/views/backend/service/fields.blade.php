@@ -185,14 +185,14 @@
         </div>
 
         <div class="form-group row">
-            <label class="col-md-2" for="price">{{ __('static.service.price') }}<span> *</span></label>
+            <label class="col-md-2" for="price">{{ __('static.service.hourly_rate') }}<span> *</span></label>
             <div class="col-md-10 error-div">
                 <div class="input-group mb-3 flex-nowrap">
                     <span class="input-group-text">{{ Helpers::getSettings()['general']['default_currency']->symbol }}</span>
                     <div class="w-100">
                         <input class='form-control' type="number" id="price" name="price" min="1"
                             value="{{ isset($service->price) ? $service->price : old('price') }}"
-                            placeholder="{{ __('static.coupon.price') }}">
+                            placeholder="{{ __('static.service.enter_hourly_rate') }}">
                         @error('price')
                             <span class="invalid-feedback d-block" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -299,7 +299,7 @@
             </div>
         </div>
         <div class="form-group row">
-            <label class="col-md-2" for="duration">{{ __('static.service.duration') }}<span> *</span></label>
+            <label class="col-md-2" for="duration">{{ __('static.service.minimum_hours') }}<span> *</span></label>
             <div class="col-md-10">
                 <input class="form-control" type="number" min="1" name="duration" id="duration" value="{{ isset($service->duration) ? $service->duration : old('duration') }}" placeholder="{{ __('static.service.enter_duration') }}">
                 @error('duration')
@@ -309,16 +309,12 @@
                 @enderror
             </div>
         </div>
-        <div class="form-group row">
+        <div class="form-group row d-none">
             <label class="col-md-2" for="duration_unit">{{ __('static.service.duration_unit') }}<span>
                     *</span></label>
             <div class="col-md-10 error-div">
                 <select class="select-2 form-control" id="duration_unit" name="duration_unit" data-placeholder="{{ __('static.service.select_duration_unit') }}">
-                    <option class="select-placeholder" value=""></option>
-                    @foreach (['hours' => 'Hours', 'minutes' => 'Minutes'] as $key => $option)
-                        <option class="option" value="{{ $key }}"
-                            @if (old('duration_unit', $service->duration_unit ?? '') === $key) selected @endif>{{ $option }}</option>
-                    @endforeach
+                    <option value="hours" selected>{{ __('static.service.select_duration_unit') }}</option>
                 </select>
                 @error('duration_unit')
                     <span class="invalid-feedback d-block" role="alert">

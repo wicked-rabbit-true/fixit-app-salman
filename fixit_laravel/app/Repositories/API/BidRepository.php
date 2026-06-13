@@ -132,6 +132,22 @@ class BidRepository extends BaseRepository
         }
     }
 
+    public function destroy($bid)
+    {
+        DB::beginTransaction();
+        try {
+            $bid->delete();
+            DB::commit();
+            return response()->json([
+                'success' => true,
+                'message' => __('static.bid.deleted_successfully'),
+            ]);
+        } catch (Exception $e) {
+            DB::rollback();
+            throw new ExceptionHandler($e->getMessage(), $e->getCode());
+        }
+    }
+
     public function createService($service_request_id, $bid)
     {
         DB::beginTransaction();

@@ -22,9 +22,9 @@
                             <div class="book-service-title">
                                 <h3>{{ $service->title }}</h3>
                                 @if (Helpers::getDefaultCurrency()->symbol_position === SymbolPositionEnum::LEFT)
-                                    <span>{{ Helpers::getDefaultCurrencySymbol() }}{{ Helpers::covertDefaultExchangeRate($service->service_rate) }}</span>
+                                    <span>{{ Helpers::getDefaultCurrencySymbol() }}{{ Helpers::covertDefaultExchangeRate($service->service_rate) }}{{ __('frontend::static.services.per_hour') }}</span>
                                 @else
-                                    <span>{{ Helpers::covertDefaultExchangeRate($service->service_rate) }} {{ Helpers::getDefaultCurrencySymbol() }}</span>
+                                    <span>{{ Helpers::covertDefaultExchangeRate($service->service_rate) }} {{ Helpers::getDefaultCurrencySymbol() }}{{ __('frontend::static.services.per_hour') }}</span>
                                 @endif                            
                             </div>
                         </div>

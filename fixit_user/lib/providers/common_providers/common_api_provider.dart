@@ -259,6 +259,9 @@ class CommonApiProvider extends ChangeNotifier {
               return CategoryModel.fromJson(category.toJson());
             }).toList() ??
             [];
+        if (homeCategoryList.isEmpty) {
+          homeCategoryList = List.from(defaultPhaseOneCategories);
+        }
         //log("message=-=-=-=-=-=-LLLL::${homeCategoryList}");
 
         // Populate homeServicePackagesList (assuming ServicePackageModel is ServicePackage or compatible)

@@ -840,7 +840,6 @@ final dio = Dio();
   Future getBookingHistory(BuildContext context,
       {String? search, bool isLoadMore = false, String? timeFilter}) async {
     final booking = Provider.of<BookingProvider>(context, listen: false);
-    // final bokkingProvider = Provider.of<BookingProvider>(context,listen: false);
     // Early return if no more data or already loading more
     if (isLoadMore && (!booking.hasMoreData || booking.isLoadingMore)) return;
 
@@ -855,30 +854,47 @@ final dio = Dio();
     notifyListeners();
 
     try {
-      // Prepare query parameters
-      Map<String, dynamic> data = {
-        /*  "page": booking.currentPage.toString(),
-        "paginate": "5", */
-        if (search != null && search.isNotEmpty) "search": search,
-      };
+      // Build query string parameters
+      List<String> queryParts = [];
+      if (booking.currentPage > 1)
+        queryParts.add("page=${booking.currentPage}");
+      queryParts.add("paginate=10");
+      if (search != null && search.isNotEmpty) queryParts.add("search=$search");
+      if (booking.statusIndex != null &&
+          booking.statusIndex! < bookingStatusList.length) {
+        queryParts.add(
+            "booking_status=${bookingStatusList[booking.statusIndex!].slug}");
+      }
+      if (booking.selectedCategory.isNotEmpty) {
+        queryParts.add(
+            "category_ids=${booking.selectedCategory.map((item) => item.toString()).join(',')}");
+      }
+      if (booking.rangeStart != null && booking.rangeEnd != null) {
+        queryParts.add(
+            "start_date=${DateFormat('yyyy-MM-dd').format(booking.rangeStart!)}");
+        queryParts.add(
+            "end_date=${DateFormat('yyyy-MM-dd').format(booking.rangeEnd!)}");
+      }
 
       // Show loading only for initial fetch
       if (!isLoadMore) showLoading(context);
 
       // Make API call
+      String apiUrl = api.booking;
+      if (timeFilter != null) {
+        queryParts.add("time_filter=${timeFilter.toLowerCase()}");
+      }
+      if (queryParts.isNotEmpty) {
+        apiUrl = "$apiUrl?${queryParts.join('&')}";
+      }
+
       final response = await apiServices.getApi(
-        timeFilter != null
-            ? "${api.booking}?time_filter=${timeFilter.toLowerCase()}"
-            : search != null && search.isNotEmpty
-                ? "${api.booking}?search=$search"
-                : api.booking,
-        /* "${api.booking}?paginate=5", */
+        apiUrl,
         [],
         isToken: true,
       );
       log("response::$response");
       if (response.isSuccess!) {
-        booking.resetPagination();
         List<BookingModel> newBookings = (response.data as List)
             .map((json) => BookingModel.fromJson(json))
             .toList();
@@ -892,8 +908,7 @@ final dio = Dio();
 
         // Update pagination state
         booking.currentPage++;
-        booking.hasMoreData =
-            newBookings.length == 5; // Assume full page means more data exists
+        booking.hasMoreData = newBookings.length == 10;
 
         // Save to local storage
         await saveBookingsToLocal(booking.bookingList);
@@ -905,9 +920,6 @@ final dio = Dio();
         if (context.mounted) {
           Fluttertoast.showToast(
               msg: "Failed to fetch bookings", backgroundColor: Colors.red);
-          // ScaffoldMessenger.of(context).showSnackBar(
-          //   const SnackBar(content: Text("Failed to fetch bookings")),
-          // );
         }
       }
     } catch (e, s) {
@@ -918,9 +930,6 @@ final dio = Dio();
       if (context.mounted) {
         Fluttertoast.showToast(
             msg: "An error occurred", backgroundColor: Colors.red);
-        // ScaffoldMessenger.of(context).showSnackBar(
-        //   const SnackBar(content: Text("An error occurred")),
-        // );
       }
     } finally {
       isBookingLoading = false;

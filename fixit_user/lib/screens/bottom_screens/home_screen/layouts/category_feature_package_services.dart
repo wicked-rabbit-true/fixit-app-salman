@@ -22,74 +22,63 @@ class CategoryFeaturePackageServices extends StatelessWidget {
         Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Column(
             children: [
-              if (commonApi.dashboardModel != null &&
-                  commonApi.dashboardModel!.categories!.isNotEmpty)
+              if (homeCategoryList.isNotEmpty)
                 HeadingRowCommon(
                         title: translations!.topCategories,
                         isTextSize: true,
                         onTap: () => route.pushNamed(
                             context, routeName.categoriesListScreen))
                     .paddingSymmetric(horizontal: Insets.i20),
-              if (commonApi.dashboardModel != null &&
-                  commonApi.dashboardModel!.categories!.isNotEmpty)
-                const VSpace(Sizes.s15),
-              if (commonApi.dashboardModel != null)
-                GridView.builder(
-                    physics: const NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    padding: const EdgeInsets.symmetric(horizontal: Sizes.s20),
-                    itemCount: commonApi.dashboardModel != null &&
-                            commonApi.dashboardModel!.categories?.length == 8
-                        ? commonApi.dashboardModel!.categories
-                            ?.getRange(0, 8)
-                            .length
-                        : commonApi.dashboardModel!.categories?.length,
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 4,
-                            mainAxisExtent: Sizes.s110,
-                            mainAxisSpacing: Sizes.s10,
-                            crossAxisSpacing: Sizes.s10),
-                    itemBuilder: (context, index) {
-                      return TopCategoriesLayout(
-                        isExapnded: false,
-                        index: index,
-                        selectedIndex: dash.topSelected,
-                        data: homeCategoryList[index],
-                        onTap: () async {
-                          log("loader state ${categoryDetails.isNavigatingToCategory}");
-                          if (categoryDetails.isNavigatingToCategory) return;
+              if (homeCategoryList.isNotEmpty) const VSpace(Sizes.s15),
+              if (homeCategoryList.isNotEmpty)
+                SizedBox(
+                  height: Sizes.s120,
+                  child: ListView.builder(
+                      physics: const BouncingScrollPhysics(),
+                      scrollDirection: Axis.horizontal,
+                      padding:
+                          const EdgeInsets.symmetric(horizontal: Sizes.s20),
+                      itemCount: homeCategoryList.length,
+                      itemBuilder: (context, index) {
+                        return TopCategoriesLayout(
+                          isExapnded: false,
+                          index: index,
+                          selectedIndex: dash.topSelected,
+                          data: homeCategoryList[index],
+                          onTap: () async {
+                            log("loader state ${categoryDetails.isNavigatingToCategory}");
+                            if (categoryDetails.isNavigatingToCategory) return;
 
-                          categoryDetails.setIsNavigatingToCategory(true);
+                            categoryDetails.setIsNavigatingToCategory(true);
 
-                          showLoading(context);
+                            showLoading(context);
 
-                          try {
-                            categoryDetails.demoList = [];
-                            await categoryDetails.fetchBannerAdsData(context);
+                            try {
+                              categoryDetails.demoList = [];
+                              await categoryDetails.fetchBannerAdsData(context);
 
-                            await categoryDetails.getServiceByCategoryId(
-                              context,
-                              id: homeCategoryList[index].id,
-                            );
+                              await categoryDetails.getServiceByCategoryId(
+                                context,
+                                id: homeCategoryList[index].id,
+                              );
 
-                            hideLoading(context);
+                              hideLoading(context);
 
-                            await route.pushNamed(
-                              context,
-                              routeName.categoriesDetailsScreen,
-                              arg: homeCategoryList[index],
-                            );
-                          } catch (e, s) {
-                            hideLoading(context);
-                            log("Navigation error: $s");
-                          } finally {
-                            // 🔥 ALWAYS reset
-                            categoryDetails.setIsNavigatingToCategory(false);
-                          }
-                        },
-                      );
-                    }),
+                              await route.pushNamed(
+                                context,
+                                routeName.categoriesDetailsScreen,
+                                arg: homeCategoryList[index],
+                              );
+                            } catch (e, s) {
+                              hideLoading(context);
+                              log("Navigation error: $s");
+                            } finally {
+                              categoryDetails.setIsNavigatingToCategory(false);
+                            }
+                          },
+                        ).padding(right: Sizes.s10);
+                      }),
+                ),
             ],
           ),
           const VSpace(Sizes.s25),

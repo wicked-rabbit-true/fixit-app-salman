@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "109267082142",
+    "project_id": "pixelstrap-6e956",
+    "storage_bucket": "pixelstrap-6e956.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:109267082142:android:4ccd2260b25daef8fa148f",
+        "android_client_info": {
+          "package_name": "com.pixelstrap.fixit_provider_api"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAwdqqN0OZ27VnS53SWboJNIK7nul0Od8s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

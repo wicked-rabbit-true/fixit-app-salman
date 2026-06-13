@@ -5,9 +5,11 @@ namespace App\Listeners;
 use Exception;
 use App\Helpers\Helpers;
 use App\Models\SmsTemplate;
+use App\Enums\BookingEnum;
 use App\Events\UpdateBookingStatusEvent;
 use App\Models\PushNotificationTemplate;
 use Illuminate\Queue\InteractsWithQueue;
+use App\Notifications\InvoiceNotification;
 use App\Notifications\UpdateBookingStatusNotification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
@@ -30,6 +32,14 @@ class UpdateBookingStatusListener implements ShouldQueue
                     $consumer->notify(new UpdateBookingStatusNotification($event->booking, $consumer));
                     $sendTo = ('+'.$consumer?->code.$consumer?->phone);
                     Helpers::sendSMS($sendTo, $this->getSMSMessage($event));
+                }
+            }
+
+            $completedStatusId = Helpers::getbookingStatusId(BookingEnum::COMPLETED);
+            if ($event->booking->booking_status_id == $completedStatusId) {
+                $consumer = Helpers::getConsumerById($event->booking->consumer_id);
+                if ($consumer) {
+                    $consumer->notify(new InvoiceNotification($event->booking));
                 }
             }
 

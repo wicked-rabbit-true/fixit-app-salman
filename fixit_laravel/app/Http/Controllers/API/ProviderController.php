@@ -112,7 +112,7 @@ class ProviderController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        return $this->repository->update($request, $id);
     }
 
     /**
@@ -120,7 +120,7 @@ class ProviderController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        return $this->repository->destroy($id);
     }
 
     public function isValidTimeSlot(Request $request)

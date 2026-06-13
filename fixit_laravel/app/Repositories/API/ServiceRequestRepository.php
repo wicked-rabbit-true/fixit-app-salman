@@ -79,6 +79,35 @@ class ServiceRequestRepository extends BaseRepository
         }
     }
 
+    public function update($request, $id)
+    {
+        DB::beginTransaction();
+        try {
+            $serviceRequest = $this->model->findOrFail($id);
+            $serviceRequest->update($request->only([
+                'title', 'description', 'duration', 'duration_unit',
+                'required_servicemen', 'initial_price', 'booking_date', 'category_ids'
+            ]));
+
+            if ($request->hasFile('image')) {
+                $serviceRequest->clearMediaCollection('image');
+                foreach ($request->file('image') as $image) {
+                    $serviceRequest->addMedia($image)->toMediaCollection('image');
+                }
+                $serviceRequest->media;
+            }
+
+            DB::commit();
+            return response()->json([
+                'success' => true,
+                'message' => __('static.service_request.updated_successfully'),
+            ]);
+        } catch (Exception $e) {
+            DB::rollback();
+            throw new ExceptionHandler($e->getMessage(), $e->getCode());
+        }
+    }
+
     public function destroy($id)
     {
         try {

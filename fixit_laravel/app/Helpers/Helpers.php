@@ -645,7 +645,9 @@ class Helpers
     public static function getOriginalServicePrice($service)
     {
         $price = Service::where('id', $service['service_id'])->value('price') ?? 0;
-        return $price ?? 0;
+        $hours = self::getServiceDurationHours($service['service_id']);
+
+        return ($price ?? 0) * $hours;
     }
 
     public static function getBookingStatusIdByName($name)
@@ -657,9 +659,44 @@ class Helpers
 
     public static function getSalePrice($service)
     {
-        $servicePrices = self::getPrice($service);
+        $serviceId = is_array($service) ? $service['service_id'] : $service->id;
 
-        return $servicePrices->price - (($servicePrices->price * $servicePrices->discount) / 100);
+        return self::getHourlyRate($service) * self::getServiceDurationHours($serviceId);
+    }
+
+    public static function getHourlyRate($service)
+    {
+        $serviceId = is_array($service) ? $service['service_id'] : $service->id;
+        $serviceModel = Service::withoutGlobalScope('exclude_custom_offers')
+            ->where('id', $serviceId)
+            ->first(['service_rate', 'price', 'discount']);
+
+        if (! $serviceModel) {
+            return 0;
+        }
+
+        if ($serviceModel->service_rate) {
+            return (float) $serviceModel->service_rate;
+        }
+
+        return (float) ($serviceModel->price - (($serviceModel->price * $serviceModel->discount) / 100));
+    }
+
+    public static function getServiceDurationHours($serviceId)
+    {
+        $serviceModel = Service::withoutGlobalScope('exclude_custom_offers')
+            ->where('id', $serviceId)
+            ->first(['duration', 'duration_unit']);
+
+        if (! $serviceModel || ! $serviceModel->duration) {
+            return 1;
+        }
+
+        if ($serviceModel->duration_unit === 'minutes') {
+            return max(1, (int) ceil($serviceModel->duration / 60));
+        }
+
+        return max(1, (int) $serviceModel->duration);
     }
 
     public static function getServicePackageSalePrice($service_package_id)
@@ -734,8 +771,8 @@ class Helpers
 
     public static function getAdditionalServiceSalePrice($additional_service_id)
     {
-        $additionalServicePrices = self::getServicePrice($additional_service_id);
-        return $additionalServicePrices?->price;
+        return self::getHourlyRate(['service_id' => $additional_service_id])
+            * self::getServiceDurationHours($additional_service_id);
     }
 
     public static function getPrice($service)
@@ -1813,16 +1850,12 @@ class Helpers
         $zoneIds = session('zoneIds', []);
         $query = Service::query();
 
-        // Always apply zone filter
-        if (count($zoneIds)) {
+        if (!empty($zoneIds)) {
             $query->whereHas('categories', function ($categories) use ($zoneIds) {
                 $categories->whereHas('zones', function ($zones) use ($zoneIds) {
                     $zones->whereIn('zones.id', $zoneIds);
                 });
             });
-        } else {
-            // If no zone is selected, return empty collection
-            return collect();
         }
 
         // Apply service ID filter if provided
@@ -1847,6 +1880,12 @@ class Helpers
 
         if (!empty($ids)) {
             $query->whereIn('id', $ids);
+
+            return $query->whereNull('parent_id')
+                ->where('status', true)
+                ->with(['services', 'children'])
+                ->orderBy('title')
+                ->get();
         }
 
         $paginate = self::getThemeOptionsPaginate();

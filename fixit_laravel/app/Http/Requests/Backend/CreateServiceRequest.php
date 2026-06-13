@@ -14,6 +14,13 @@ class CreateServiceRequest extends FormRequest
         return true;
     }
 
+    public function prepareForValidation(): void
+    {
+        $this->merge([
+            'duration_unit' => 'hours',
+        ]);
+    }
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -30,7 +37,7 @@ class CreateServiceRequest extends FormRequest
             'required_servicemen' => 'required|numeric',
             'price' => 'required',
             'duration' => 'required',
-            'duration_unit' => 'required|in:hours,minutes',
+            'duration_unit' => 'required|in:hours',
             'service_id' => 'array',
             'service_id*' => 'exists:services,id',
             'per_serviceman_commission' => 'required|numeric|between:0,100',

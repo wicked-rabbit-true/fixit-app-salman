@@ -213,14 +213,7 @@ class LoginController extends Controller
         }
 
         $user = User::where('phone', $request->phone)->first();
-        $otp = rand(111111, 999999);
-        event(new CreateOtpEvent($request->phone, $otp));
-        if ($user) {
-            if (!$user->hasRole(RoleEnum::CONSUMER)) {
-                $user->assignRole(RoleEnum::CONSUMER);
-            }
-            return redirect()->route('frontend.login.otp', ['phone' => $request->phone, 'code' => $request->code]);
-        } else {
+        if (!$user) {
             $user = User::create([
                 'phone' => $request->phone,
                 'code' => $request->code,
@@ -228,14 +221,19 @@ class LoginController extends Controller
                 'referral_code' => Helpers::getReferralCodeByName($request->name ?? 'User', 6),
             ]);
             $user->assignRole(RoleEnum::CONSUMER);
-            return redirect()->route('frontend.login.otp', ['phone' => $request->phone, 'code' => $request->code]);
+        } elseif (!$user->hasRole(RoleEnum::CONSUMER)) {
+            $user->assignRole(RoleEnum::CONSUMER);
         }
+
+        $otp = rand(111111, 999999);
+        event(new CreateOtpEvent($request->phone, $otp));
+        return redirect()->route('frontend.login.otp', ['phone' => $request->phone, 'code' => $request->code]);
     }
 
     public function showOtp(Request $request)
     {
         if (!$request->has('phone') || !$request->has('code')) {
-            return redirect()->route('login.mobile')->withErrors(['phone' => 'Phone number is required.']);
+            return redirect()->route('frontend.login.number')->withErrors(['phone' => 'Phone number is required.']);
         }
 
         return view('frontend.auth.otp', ['phone' => $request->phone, 'code' => $request->code]);

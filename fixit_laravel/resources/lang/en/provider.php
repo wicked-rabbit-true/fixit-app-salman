@@ -1,7 +1,7 @@
 <?php
 
 return [
-  "fixit" => "fixit",
+  "fixit" => "The Perhour",
   "login" => "LOGIN",
   "email" => "Email",
   "servicePrice"=> "Service Price",
@@ -678,7 +678,7 @@ return [
   "enterReferralCode" => "Enter Referral Code",
   "refDec1" => "Hey! Use my referral code",
   "share" => "Share",
-  "refDec2" => "to join Fixit and earn rewards!",
+  "refDec2" => "to join The Perhour and earn rewards!",
   "earnCoin" => "Earn 50 coins after completing your first bookings.",
   "noCoins" => "50 coins",
   "copiedToClipboard" => "Copied to clipboard",

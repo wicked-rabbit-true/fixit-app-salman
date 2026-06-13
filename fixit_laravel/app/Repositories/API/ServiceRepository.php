@@ -119,7 +119,7 @@ class ServiceRepository extends BaseRepository
                     'content' => $request->content ?? null,
                     'speciality_description' => $request->speciality_description ?? null,
                     'is_featured' => $request->is_featured,
-                    'duration_unit' => $request->duration_unit,
+                    'duration_unit' => 'hours',
                     'service_rate' => $service_rate,
                     'isMultipleServiceman' => $request->isMultipleServiceman ?? 0,
                     'required_servicemen' => $request->required_servicemen,

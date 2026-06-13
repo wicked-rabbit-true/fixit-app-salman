@@ -26,7 +26,10 @@ class DatabaseSeeder extends Seeder
             SettingSeeder::class,
             HomePageSeeder::class,
             CustomSmsGatewaySettingSeeder::class,
-            SeoSettingSeeder::class
+            SeoSettingSeeder::class,
+            PerhourBrandingSeeder::class,
+            PerhourCategorySeeder::class,
+            PerhourZoneSeeder::class,
         ]);
     }
 }

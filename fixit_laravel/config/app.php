@@ -26,7 +26,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Fixit-Laravel'),
+    'name' => env('APP_NAME', 'The Perhour'),
 
     /*
     |--------------------------------------------------------------------------

@@ -384,19 +384,19 @@
                                                                 </span>
                                                                 <small>
                                                                     @if (Helpers::getDefaultCurrency()->symbol_position === SymbolPositionEnum::LEFT)
-                                                                        {{ Helpers::getDefaultCurrencySymbol() }}{{ Helpers::covertDefaultExchangeRate($service->service_rate) }}
+                                                                        {{ Helpers::getDefaultCurrencySymbol() }}{{ Helpers::covertDefaultExchangeRate($service->service_rate) }}{{ __('frontend::static.services.per_hour') }}
                                                                     @else
                                                                         {{ Helpers::covertDefaultExchangeRate($service->service_rate) }}
-                                                                        {{ Helpers::getDefaultCurrencySymbol() }}
+                                                                        {{ Helpers::getDefaultCurrencySymbol() }}{{ __('frontend::static.services.per_hour') }}
                                                                     @endif
                                                                 </small>
                                                             @else
                                                                 <small>
                                                                     @if (Helpers::getDefaultCurrency()->symbol_position === SymbolPositionEnum::LEFT)
-                                                                        {{ Helpers::getDefaultCurrencySymbol() }}{{ Helpers::covertDefaultExchangeRate($service->price) }}
+                                                                        {{ Helpers::getDefaultCurrencySymbol() }}{{ Helpers::covertDefaultExchangeRate($service->service_rate) }}{{ __('frontend::static.services.per_hour') }}
                                                                     @else
-                                                                        {{ Helpers::covertDefaultExchangeRate($service->price) }}
-                                                                        {{ Helpers::getDefaultCurrencySymbol() }}
+                                                                        {{ Helpers::covertDefaultExchangeRate($service->service_rate) }}
+                                                                        {{ Helpers::getDefaultCurrencySymbol() }}{{ __('frontend::static.services.per_hour') }}
                                                                     @endif
                                                                 </small>
                                                             @endif
@@ -410,7 +410,7 @@
                                                             @if ($service?->duration)
                                                                 <li class="time">
                                                                     <i class="iconsax" icon-name="clock"></i>
-                                                                    <span>{{ $service?->duration }}{{ $service?->duration_unit === 'hours' ? 'h' : 'm' }}</span>
+                                                                    <span>{{ $service?->duration }}h min</span>
                                                                 </li>
                                                             @endif
                                                             <li class="w-auto service-person">
@@ -577,19 +577,19 @@
                                                             </span>
                                                             <small>
                                                                 @if (Helpers::getDefaultCurrency()->symbol_position === SymbolPositionEnum::LEFT)
-                                                                    {{ Helpers::getDefaultCurrencySymbol() }}{{ Helpers::covertDefaultExchangeRate($service->service_rate) }}
+                                                                    {{ Helpers::getDefaultCurrencySymbol() }}{{ Helpers::covertDefaultExchangeRate($service->service_rate) }}{{ __('frontend::static.services.per_hour') }}
                                                                 @else
                                                                     {{ Helpers::covertDefaultExchangeRate($service->service_rate) }}
-                                                                    {{ Helpers::getDefaultCurrencySymbol() }}
+                                                                    {{ Helpers::getDefaultCurrencySymbol() }}{{ __('frontend::static.services.per_hour') }}
                                                                 @endif
                                                             </small>
                                                         @else
                                                             <small>
                                                                 @if (Helpers::getDefaultCurrency()->symbol_position === SymbolPositionEnum::LEFT)
-                                                                    {{ Helpers::getDefaultCurrencySymbol() }}{{ Helpers::covertDefaultExchangeRate($service->price) }}
+                                                                    {{ Helpers::getDefaultCurrencySymbol() }}{{ Helpers::covertDefaultExchangeRate($service->service_rate) }}{{ __('frontend::static.services.per_hour') }}
                                                                 @else
-                                                                    {{ Helpers::covertDefaultExchangeRate($service->price) }}
-                                                                    {{ Helpers::getDefaultCurrencySymbol() }}
+                                                                    {{ Helpers::covertDefaultExchangeRate($service->service_rate) }}
+                                                                    {{ Helpers::getDefaultCurrencySymbol() }}{{ __('frontend::static.services.per_hour') }}
                                                                 @endif
                                                             </small>
                                                         @endif
@@ -603,7 +603,7 @@
                                                         @if ($service?->duration)
                                                             <li class="time">
                                                                 <i class="iconsax" icon-name="clock"></i>
-                                                                <span>{{ $service?->duration }}{{ $service?->duration_unit === 'hours' ? 'h' : 'm' }}</span>
+                                                                <span>{{ $service?->duration }}h min</span>
                                                             </li>
                                                         @endif
                                                         <li class="w-auto service-person">
@@ -1185,43 +1185,42 @@
         const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
         $(".select-2").select2();
         var categorySlider = new Swiper(".category-slider", {
-            slidesPerView: 9,
-            spaceBetween: 24,
+            slidesPerView: 2.5,
+            spaceBetween: 12,
+            freeMode: true,
             pagination: {
-                el: ".swiper-pagination",
+                el: ".category-slider .swiper-pagination",
                 clickable: true,
             },
             breakpoints: {
                 0: {
-                    slidesPerView: 2,
-                    spaceBetween: 15,
+                    slidesPerView: 2.5,
+                    spaceBetween: 12,
                 },
                 370: {
-                    slidesPerView: 3,
-                    spaceBetween: 15,
+                    slidesPerView: 3.5,
+                    spaceBetween: 12,
                 },
                 590: {
-                    slidesPerView: 4,
-                    spaceBetween: 15,
+                    slidesPerView: 4.5,
+                    spaceBetween: 14,
                 },
                 790: {
-                    slidesPerView: 5,
-                    spaceBetween: 15,
+                    slidesPerView: 5.5,
+                    spaceBetween: 16,
                 },
                 950: {
-                    slidesPerView: 6,
-                    //   spaceBetween: 40,
+                    slidesPerView: 6.5,
                 },
                 1160: {
-                    slidesPerView: 7,
-                    //   spaceBetween: 40,
+                    slidesPerView: 8,
                 },
                 1380: {
-                    slidesPerView: 8,
-                    //   spaceBetween: 40,
+                    slidesPerView: 9,
                 },
                 1600: {
-                    slidesPerView: 9,
+                    slidesPerView: 10,
+                    spaceBetween: 24,
                 },
             },
         });

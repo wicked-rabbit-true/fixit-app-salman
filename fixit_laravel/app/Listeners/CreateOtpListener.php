@@ -11,33 +11,29 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 
 class CreateOtpListener
 {
-    /**
-     * Create the event listener.
-     */
+
     public function __construct()
     {
-        //
     }
 
-    /**
-     * Handle the event.
-     */
     public function handle(CreateOtpEvent $event): void
     {
         $user = User::where('phone', $event->phone)->first();
-        
-        $otp = rand(100000, 999999); 
-        
-        $message = "Your OTP code is: {$otp}";
         $sendTo = '+' . $user?->code . $user?->phone;
-        Helpers::sendSMS($sendTo, $message);
-        DB::table('password_resets')->insert([
-            'phone' => $event->phone,
-            'otp' => $otp,
-            'created_at' => now(),
-        ]);
         if ($user) {
+            Helpers::sendSMS($sendTo, "Your OTP code is: {$event->otp}");
+            DB::table('password_resets')->insert([
+                'phone' => $event->phone,
+                'otp' => $event->otp,
+                'created_at' => now(),
+            ]);
             $this->sendPushNotification($user->phone, "Your OTP has been sent to your mobile.");
+        } else {
+            DB::table('password_resets')->insert([
+                'phone' => $event->phone,
+                'otp' => $event->otp,
+                'created_at' => now(),
+            ]);
         }
     }
 

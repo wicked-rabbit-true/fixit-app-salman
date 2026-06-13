@@ -77,7 +77,7 @@ class BidController extends Controller
      */
     public function destroy(Bid $bid)
     {
-        //
+        return $this->repository->destroy($bid);
     }
 
     public function filter($bids, $request)

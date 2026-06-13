@@ -90,12 +90,12 @@
                 <div class="sticky">
                     <div class="amount">
                         <div class="amount-header">
-                            <span>{{ __('frontend::static.services.amount')}} :</span>
+                            <span>{{ __('frontend::static.services.hourly_rate')}} :</span>
                             <small class="value">
                                 @if (Helpers::getDefaultCurrency()->symbol_position === SymbolPositionEnum::LEFT)
-                                    {{ Helpers::getDefaultCurrencySymbol() }}{{ Helpers::covertDefaultExchangeRate($service->service_rate) }}
+                                    {{ Helpers::getDefaultCurrencySymbol() }}{{ Helpers::covertDefaultExchangeRate($service->service_rate) }}{{ __('frontend::static.services.per_hour') }}
                                 @else
-                                    {{ Helpers::covertDefaultExchangeRate($service->service_rate) }} {{ Helpers::getDefaultCurrencySymbol() }}
+                                    {{ Helpers::covertDefaultExchangeRate($service->service_rate) }} {{ Helpers::getDefaultCurrencySymbol() }}{{ __('frontend::static.services.per_hour') }}
                                 @endif
                             </small>
                         </div>
@@ -104,7 +104,7 @@
                                 @if($service?->duration)
                                 <li>
                                     <i class="iconsax" icon-name="clock"></i>
-                                    {{ __('frontend::static.services.around')}} {{ $service?->duration }} {{ $service?->duration_unit }}
+                                    {{ __('frontend::static.services.minimum_hours')}}: {{ $service?->duration }}h
                                 </li>
                                 @endif
                                 <li>
